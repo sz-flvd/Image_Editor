@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/collageLayout"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/dark_blue"
+    tools:context=".CollageActivity">
+
+    <Button
+        android:id="@+id/makeCollage"
+        android:layout_width="310dp"
+        android:layout_height="75dp"
+        android:backgroundTint="@color/blueish"
+        android:text="@string/make_collage"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.909" />
+
+    <Button
+        android:id="@+id/changeColour"
+        android:layout_width="310dp"
+        android:layout_height="50dp"
+        android:backgroundTint="@color/bright_bluish"
+        android:text="@string/change_bg"
+        android:textAlignment="center"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.976" />
+
+    <Button
+        android:id="@+id/colourChanged"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:backgroundTint="@color/bright_bluish"
+        android:text="@string/ok"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.944" />
+
+    <SeekBar
+        android:id="@+id/redSeekBar"
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:max="255"
+        android:progress="32"
+        android:progressDrawable="@drawable/red_bar_progress"
+        android:translationZ="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.711" />
+
+    <SeekBar
+        android:id="@+id/greenSeekBar"
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:max="255"
+        android:progress="32"
+        android:progressDrawable="@drawable/green_bar_progress"
+        android:translationZ="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.754" />
+
+    <SeekBar
+        android:id="@+id/blueSeekBar"
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:max="255"
+        android:progress="79"
+        android:progressDrawable="@drawable/blue_bar_progress"
+        android:translationZ="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.797" />
+
+    <SeekBar
+        android:id="@+id/alphaSeekBar"
+        android:layout_width="400dp"
+        android:layout_height="30dp"
+        android:max="255"
+        android:progress="255"
+        android:progressDrawable="@drawable/alpha_bar_progress"
+        android:translationZ="45dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.84" />
+</androidx.constraintlayout.widget.ConstraintLayout>

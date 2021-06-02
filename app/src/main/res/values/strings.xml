@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">Image_Editor</string>
     <string name="pathname">storage/emulated/0/DCIM/edited</string>
+    <string name="gallery">Gallery</string>
+    <string name="make_collage">Make collage</string>
+    <string name="ok">OK</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="change_bg">Change background colour</string>
+    <string name="def_img_description">image description</string>
+    <string name="add_frame">Add frame</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
