@@ -103,8 +103,6 @@ class GalleryActivity : AppCompatActivity() {
             Log.d("am2021", e.message.toString())
         }
 
-        cursor!!.close()
-
         images.sortByDescending {
             it.getDateAdded()
         }
