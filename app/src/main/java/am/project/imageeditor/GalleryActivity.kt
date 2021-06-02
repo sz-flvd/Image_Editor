@@ -42,10 +42,6 @@ class GalleryActivity : AppCompatActivity() {
             recView.layoutManager = GridLayoutManager(this, 3)
         else recView.layoutManager = GridLayoutManager(this, 6)
 
-//        imageList = getImagePaths()
-//        adapter = GalleryAdapter(imageList, this)
-//        if(imageList.isNotEmpty()) recView.adapter = adapter
-
         val helper: SnapHelper = LinearSnapHelper()
         helper.attachToRecyclerView(recView)
 
@@ -69,10 +65,6 @@ class GalleryActivity : AppCompatActivity() {
         imageList = getImagePaths()
         adapter = GalleryAdapter(imageList, this)
         if(imageList.isNotEmpty()) recView.adapter = adapter
-
-//        imageList.clear()
-//        imageList.addAll(getImagePaths())
-//        adapter.notifyDataSetChanged()
     }
 
     private fun getImagePaths(): ArrayList<ImageData> {
