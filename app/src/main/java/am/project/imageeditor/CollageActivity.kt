@@ -1,6 +1,9 @@
 package am.project.imageeditor
 
+import android.Manifest
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.annotation.SuppressLint
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -15,6 +18,8 @@ import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.Toast
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import com.bumptech.glide.Glide
@@ -36,11 +41,15 @@ class CollageActivity : AppCompatActivity() {
     private var green: Int = 0
     private var blue: Int = 0
     private var alpha: Int = 0
+    private val requestWriteExternalStorage = 1
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_collage)
+
+        if(ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE), requestWriteExternalStorage)
 
         layout = findViewById(R.id.collageLayout)
 
@@ -187,16 +196,18 @@ class CollageActivity : AppCompatActivity() {
 
         if(!folder.exists()) folder.mkdirs()
 
-        val filename = "edited${System.currentTimeMillis()}.PNG"
+        val filename = "edited${System.currentTimeMillis()}.png"
 
         try {
-            val out = FileOutputStream("$pathname/$filename")
+            val out = FileOutputStream(File("$pathname/$filename"))
             finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+            out.flush()
+            out.close()
+            Toast.makeText(this, "Collage created successfully!", Toast.LENGTH_SHORT).show()
         } catch(e: IOException) {
             Log.e("am2021", e.message.toString())
         }
 
-        Toast.makeText(this, "Collage created successfully!", Toast.LENGTH_SHORT).show()
         finish()
     }
 }

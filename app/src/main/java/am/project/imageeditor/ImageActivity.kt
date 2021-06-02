@@ -1,5 +1,8 @@
 package am.project.imageeditor
 
+import android.Manifest
+import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
+import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -12,6 +15,8 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.SeekBar
 import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.core.net.toUri
 import androidx.core.view.isVisible
 import androidx.core.view.setPadding
@@ -39,10 +44,14 @@ class ImageActivity : AppCompatActivity() {
     private var alpha: Int = 0
     private var padding: Int = 0
     private var settingFrame: Boolean = false
+    private val requestWriteExternalStorage = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_image)
+
+        if(ContextCompat.checkSelfPermission(this, WRITE_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, arrayOf(WRITE_EXTERNAL_STORAGE), requestWriteExternalStorage)
 
         val uri: Uri? = intent.getStringExtra(EXTRA_URI)?.toUri()
         val desc: String? = intent.getStringExtra(EXTRA_NAME)
@@ -255,16 +264,18 @@ class ImageActivity : AppCompatActivity() {
 
         if(!folder.exists()) folder.mkdirs()
 
-        val filename = "edited${System.currentTimeMillis()}.PNG"
+        val filename = "edited${System.currentTimeMillis()}.png"
 
         try {
-            val out = FileOutputStream("$pathname/$filename")
+            val out = FileOutputStream(File("$pathname/$filename"))
             finalBitmap.compress(Bitmap.CompressFormat.PNG, 100, out)
+            out.flush()
+            out.close()
+            Toast.makeText(this, "Frame added successfully!", Toast.LENGTH_SHORT).show()
         } catch(e: IOException) {
             Log.e("am2021", e.message.toString())
         }
 
-        Toast.makeText(this, "Frame added successfully!", Toast.LENGTH_SHORT).show()
         finish()
     }
 }
