@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Image_Editor</string>
+    <string name="pathname">storage/emulated/0/DCIM/edited</string>
 </resources>
