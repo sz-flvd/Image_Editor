@@ -1,6 +1,6 @@
 package am.project.imageeditor
 
-import android.Manifest
+import android.Manifest.permission.READ_EXTERNAL_STORAGE
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.content.res.Configuration
@@ -14,10 +14,8 @@ import android.widget.Button
 import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
-import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearSnapHelper
-import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.SnapHelper
+import androidx.recyclerview.widget.*
+import kotlin.collections.ArrayList
 
 const val SELECTED_IMAGES = "SELECTED_IMAGES"
 
@@ -35,10 +33,8 @@ class GalleryActivity : AppCompatActivity() {
 
         nextButton = findViewById(R.id.toCollage)
 
-        if(ContextCompat.checkSelfPermission(this,
-                Manifest.permission.READ_EXTERNAL_STORAGE
-            ) != PackageManager.PERMISSION_GRANTED)
-            ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.READ_EXTERNAL_STORAGE), requestReadExternalStorage)
+        if(ContextCompat.checkSelfPermission(this, READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED)
+            ActivityCompat.requestPermissions(this, arrayOf(READ_EXTERNAL_STORAGE), requestReadExternalStorage)
 
         recView = findViewById(R.id.galleryRecyclerView)
 
@@ -46,9 +42,9 @@ class GalleryActivity : AppCompatActivity() {
             recView.layoutManager = GridLayoutManager(this, 3)
         else recView.layoutManager = GridLayoutManager(this, 6)
 
-        imageList = getImagePaths()
-        adapter = GalleryAdapter(imageList, this)
-        if(imageList.isNotEmpty()) recView.adapter = adapter
+//        imageList = getImagePaths()
+//        adapter = GalleryAdapter(imageList, this)
+//        if(imageList.isNotEmpty()) recView.adapter = adapter
 
         val helper: SnapHelper = LinearSnapHelper()
         helper.attachToRecyclerView(recView)
@@ -56,6 +52,7 @@ class GalleryActivity : AppCompatActivity() {
         nextButton.setOnClickListener {
             selectedImages.clear()
             selectedImages.addAll(adapter.getSelectedImages())
+            adapter.clearSelectedImages()
             if(selectedImages.isEmpty()) Toast.makeText(this, "No images have been selected\nSelect images by long-clicking", Toast.LENGTH_SHORT).show()
             else {
                 val imageUris = selectedImages.toTypedArray()
@@ -69,9 +66,13 @@ class GalleryActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        imageList.clear()
-        imageList.addAll(getImagePaths())
-        adapter.notifyDataSetChanged()
+        imageList = getImagePaths()
+        adapter = GalleryAdapter(imageList, this)
+        if(imageList.isNotEmpty()) recView.adapter = adapter
+
+//        imageList.clear()
+//        imageList.addAll(getImagePaths())
+//        adapter.notifyDataSetChanged()
     }
 
     private fun getImagePaths(): ArrayList<ImageData> {
