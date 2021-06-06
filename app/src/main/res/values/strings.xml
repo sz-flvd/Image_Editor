@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">Image_Editor</string>
     <string name="pathname">storage/emulated/0/DCIM/edited</string>
-    <string name="gallery">Gallery</string>
+    <string name="gallery">Go to gallery</string>
     <string name="make_collage">Make collage</string>
     <string name="ok">OK</string>
     <string name="save">Save</string>

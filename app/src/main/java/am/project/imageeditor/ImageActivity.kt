@@ -1,6 +1,5 @@
 package am.project.imageeditor
 
-import android.Manifest
 import android.Manifest.permission.WRITE_EXTERNAL_STORAGE
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
